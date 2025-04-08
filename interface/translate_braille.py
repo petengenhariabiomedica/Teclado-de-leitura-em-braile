@@ -69,13 +69,9 @@ class BrailleKeyboard:
 
 
 if __name__ == "__main__":
-    braille_keyboard = BrailleKeyboard()
-    if braille_keyboard.connect_serial():
-        pdf_path = "exemplo.pdf"  # Substitua pelo caminho do seu PDF
-        texto = braille_keyboard.extract_text_from_pdf(pdf_path)
-        if texto:
-            braille_keyboard.send_text_over_serial(texto)
-        braille_keyboard.close()
-    else:
-        print("[✘] Não foi possível conectar ao dispositivo.")
-        braille_keyboard.close()
+    bk = BrailleKeyboard()
+
+    if bk.connect_serial():
+        texto = bk.extract_text_from_pdf("meuarquivo.pdf", page_number=0)
+        bk.send_text_over_serial(texto, delay=0.02, wait_ack=True)
+        bk.close()
