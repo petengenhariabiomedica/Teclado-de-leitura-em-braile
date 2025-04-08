@@ -68,10 +68,3 @@ class BrailleKeyboard:
             print("[✔] Conexão serial encerrada.")
 
 
-if __name__ == "__main__":
-    bk = BrailleKeyboard()
-
-    if bk.connect_serial():
-        texto = bk.extract_text_from_pdf("meuarquivo.pdf", page_number=0)
-        bk.send_text_over_serial(texto, delay=0.02, wait_ack=True)
-        bk.close()
