@@ -16,7 +16,18 @@ def index():
 
             bk = BrailleKeyboard()
             if bk.connect_serial():
+                # Extrai o texto do PDF
                 texto = bk.extract_text_from_pdf(filepath, page_number=0)
+
+                # Arquivo .txt criado para verificar o texto gerado pelo PDF, para fins de teste
+                txt_filename = pdf_file.filename.rsplit('.', 1)[0] + '.txt'
+                txt_path = os.path.join(app.config['UPLOAD_FOLDER'], txt_filename)
+
+                # Salva o texto extraído no arquivo .txt
+                with open(txt_path, 'w', encoding='utf-8') as txt_file:
+                    txt_file.write(texto or "[Texto vazio ou não extraído]")                
+                    
+                # Envia o texto extraído para o dispositivo Braille    
                 bk.send_text_over_serial(texto)
                 bk.close()
             return "PDF enviado com sucesso!"
