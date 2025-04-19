@@ -1,14 +1,27 @@
-from flask import Flask, render_template, request
+# -*- coding: utf-8 -*-
+from flask import Flask, render_template, request, Response, redirect, url_for
 from BrailleKeyboard import BrailleKeyboard
 import os
+import time
+import threading
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Declara as variáveis de caminho em um escopo mais amplo
-pdf_filepath_global = None
-txt_filepath_global = None
+# Configurações iniciais
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.secret_key = os.environ.get('SECRET_KEY', 'fallback_key_insegura')
+
+# Cria o diretório de uploads se não existir
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# Variáveis globais para controle do processo
+current_text = ""
+serial_index = 0       # Índice controlado pela thread serial
+sse_index = 0          # Índice controlado pelo SSE
+processing = False
+bk_instance = None
+lock = threading.Lock()  # Lock para sincronização
+
 
 def delete_file(filepath):
     """Apaga um arquivo se ele existir."""
@@ -19,56 +32,155 @@ def delete_file(filepath):
     except Exception as e:
         print(f"[ERRO] Falha ao apagar arquivo {filepath}: {e}")
 
+
+def serial_sender():
+    global serial_index, processing, bk_instance
+
+    while serial_index < len(current_text) and processing:
+        char = current_text[serial_index]  # Só leitura, sem necessidade de lock
+
+        if char.isalpha():
+            try:
+                # Limpa o buffer antes de enviar
+                bk_instance.serial_connection.reset_input_buffer()
+                bk_instance.serial_connection.write(char.encode('utf-8'))
+
+                # Aguarda confirmação com timeout
+                ack = bk_instance.serial_connection.readline().decode('utf-8').strip()
+
+                if ack == "OK":
+                    with lock:
+                        serial_index += 1
+                        print(f"[✔] Caractere '{char}' enviado e confirmado")
+                else:
+                    print(f"[✘] ACK não recebido.")
+                    print(f"[✘] Caractere '{char}' não enviado corretamente.")
+
+            except Exception as e:
+                print(f"Erro ao enviar caractere: {e}")
+                break
+        else:
+            with lock:
+                serial_index += 1
+
+    processing = False
+    print("[INFO] Thread de envio serial finalizada")
+
+
+@app.route('/stream')
+def stream():
+    def generate_serial_stream():
+        global sse_index
+
+        print("[SSE] Conexão estabelecida com cliente")
+
+        while processing or sse_index < len(current_text):
+            with lock:
+                if sse_index < serial_index:
+                    char = current_text[sse_index]
+                    print(f"[SSE] Enviando caractere: {char}")
+                    sse_index += 1
+                    yield f"data: {char}\n\n"
+
+                elif sse_index >= len(current_text):
+                    print("[SSE] Envio completo")
+                    yield "data: done\n\n"
+                    break
+
+            time.sleep(0.1)  # Aumentado para estabilidade
+
+    return Response(
+        generate_serial_stream(),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'Content-Type': 'text/event-stream; charset=utf-8'
+        }
+    )
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    """Rota principal do aplicativo."""
-    global pdf_filepath_global
-    global txt_filepath_global
+    global current_text, serial_index, sse_index, processing, bk_instance
+    global pdf_filepath_global, txt_filepath_global
 
-    try:
-        if request.method == 'POST':
-            pdf_file = request.files['pdf']
-            if pdf_file.filename != '':
-                pdf_filename = pdf_file.filename
+    # Resetar variáveis a cada novo envio
+    current_text = ""
+    serial_index = 0
+    sse_index = 0
+    processing = False
+    pdf_filepath_global = None
+    txt_filepath_global = None
+
+    if request.method == 'POST':
+        if 'pdf' not in request.files:
+            return "Nenhum arquivo enviado"
+
+        file = request.files['pdf']
+        if file.filename == '':
+            return "Nenhum arquivo selecionado"
+
+        if file and file.filename.endswith('.pdf'):
+            try:
+                # Salva o PDF
+                pdf_filename = file.filename
                 pdf_filepath_global = os.path.join(app.config['UPLOAD_FOLDER'], pdf_filename)
-                pdf_file.save(pdf_filepath_global)
+                file.save(pdf_filepath_global)
 
+                # Processa o texto
                 bk = BrailleKeyboard()
                 if bk.connect_serial():
-                    # Extrai o texto do PDF
                     texto = bk.extract_text_from_pdf(pdf_filepath_global, page_number=0)
+                    print(f"[INFO] Texto extraído: {texto[:50]}...")
 
-                    # Arquivo .txt criado para verificar o texto gerado pelo PDF, para fins de teste
+                    # Cria o .txt com o texto extraído
                     txt_filename_base = pdf_filename.rsplit('.', 1)[0]
                     txt_filename = f"{txt_filename_base}.txt"
                     txt_filepath_global = os.path.join(app.config['UPLOAD_FOLDER'], txt_filename)
 
-                    # Salva o texto extraído no arquivo .txt
                     with open(txt_filepath_global, 'w', encoding='utf-8') as txt_file:
                         txt_file.write(texto or "[Texto vazio ou não extraído]")
 
-                    # Envia o texto extraído para o dispositivo Braille
-                    bk.send_text_over_serial(texto)
-                    bk.close()
-                return "PDF enviado com sucesso!"
-        return render_template('index.html')
-    except Exception as e:
-        print(f"[ERRO] Ocorreu um erro durante o processamento: {e}")
-        return "Erro ao processar o PDF."
+                    print(f"[INFO] Arquivo TXT criado em: {txt_filepath_global}")
+
+                    # Atualiza variáveis globais
+                    current_text = texto.upper()
+                    print(f"[INFO] Texto preparado para envio: {current_text[:50]}...")
+
+                    with lock:
+                        serial_index = 0
+                        sse_index = 0
+                        processing = True
+                        bk_instance = bk
+
+                    # Inicia thread de envio serial
+                    sender_thread = threading.Thread(target=serial_sender)
+                    sender_thread.start()
+
+                    return redirect(url_for('streaming'))
+
+                return "Erro ao conectar ao dispositivo"
+
+            except Exception as e:
+                print(f"[ERRO] Ocorreu um erro: {e}")
+                return "Erro ao processar o PDF"
+
+    return render_template('index.html')
+
+
+@app.route('/streaming')
+def streaming():
+    return render_template('streaming.html')
+
 
 if __name__ == '__main__':
     try:
-        app.run(debug=True)  # Isso inicia o servidor Flask
-    except Exception as e:
-        print("[INFO] Tentando apagar os arquivos...")
-        delete_file(pdf_filepath_global)
-        delete_file(txt_filepath_global)
-        print("[INFO] Servidor Flask encerrado.")
+        app.run(debug=True, threaded=True, port=5000)
     finally:
         delete_file(pdf_filepath_global)
         print(f'[INFO] Arquivo PDF apagado: {pdf_filepath_global}')
+
         delete_file(txt_filepath_global)
         print(f'[INFO] Arquivo TXT apagado: {txt_filepath_global}')
-        print("[INFO] Arquivos temporários apagados.")
-        
 
+        print("[INFO] Arquivos temporários apagados.")
