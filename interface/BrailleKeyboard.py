@@ -30,7 +30,7 @@ class BrailleKeyboard:
             print(f"[✘] Erro ao extrair texto do PDF: {e}")
             return ""
 
-    def connect_serial(self, baudrate=9600):
+    def connect_serial(self, baudrate=115200):
         """Estabelece conexão serial com o ESP32."""
         if self.port is None:
             print("[✘] Porta serial não encontrada.")
@@ -44,22 +44,38 @@ class BrailleKeyboard:
             print(f"[✘] Erro ao conectar na porta serial: {e}")
             return False
 
-    def send_text_over_serial(self, text, delay=0.01, wait_ack=True):
+    def send_text_over_serial(self, text, delay=0.01, wait_ack=True, max_retries=5):
         """Envia o texto caractere por caractere pela serial."""
         if self.serial_connection is None:
             print("[✘] Conexão serial não está aberta.")
             return
+        
+        for index, char in enumerate(text):
+            if not char.isalpha():  # Enviar só letras
+                continue
+            try:
+                self.serial_connection.write(char.encode('utf-8'))
+                time.sleep(delay)
 
-        for char in text:
-            self.serial_connection.write(char.encode('utf-8'))
-            time.sleep(delay)
-
-            if wait_ack:
-                ack = self.serial_connection.readline().decode('utf-8').strip()
-                while ack != "OK":
-                    print(f"Aguardando ACK... Última resposta: {ack}")
-                    ack = self.serial_connection.readline().decode('utf-8').strip()
+                if wait_ack:
+                    attempts = 0
+                    while attempts < max_retries:
+                        ack = self.serial_connection.readline().decode('utf-8').strip()
+                        if ack == "OK":
+                            print(f"[✔] Caractere '{char}' enviado e ACK recebido.")
+                            break
+                        else:
+                                attempts += 1
+                                print(f"[...] Aguardando ACK para '{char}' (tentativa {attempts})... Última resposta: {ack}")
+                                time.sleep(0.1)
+                        if attempts == max_retries:
+                            print(f"[✘] Falha no ACK após {max_retries} tentativas para o caractere '{char}' (índice {index})")
+                            break  # ou continue para ignorar e seguir
+                
+            except Exception as e:
+                print(f"[✘] Erro ao enviar caractere '{char}': {e}")
         print("[✔] Texto enviado com sucesso!")
+            
 
     def close(self):
         """Fecha a conexão serial."""
