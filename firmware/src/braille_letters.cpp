@@ -1,54 +1,63 @@
 #include <Arduino.h>
-#include "servo.h"
+#include <stddef.h>
 #include "braille_letters.h"
 
-uint8_t a_braille[6] = {1, 0, 0, 0, 0, 0}; 
-uint8_t b_braille[6] = {1, 0, 1, 0, 0, 0};
-uint8_t c_braille[6] = {1, 1, 0, 0, 0, 0};
-uint8_t d_braille[6] = {1, 1, 0, 1, 0, 0};
-uint8_t e_braille[6] = {1, 0, 0, 1, 0, 0};
-uint8_t f_braille[6] = {1, 1, 1, 0, 0, 0};
-uint8_t g_braille[6] = {1, 1, 1, 1, 0, 0};
-uint8_t h_braille[6] = {1, 0, 1, 1, 0, 0};
-uint8_t i_braille[6] = {0, 1, 1, 0, 0, 0};
-uint8_t j_braille[6] = {0, 1, 1, 1, 0, 0};
-uint8_t k_braille[6] = {1, 0, 0, 0, 1, 0};
-uint8_t l_braille[6] = {1, 0, 1, 0, 1, 0};
-uint8_t m_braille[6] = {1, 1, 0, 0, 1, 0};
-uint8_t n_braille[6] = {1, 1, 0, 1, 1, 0};
-uint8_t o_braille[6] = {1, 0, 0, 1, 1, 0};
-uint8_t p_braille[6] = {1, 1, 1, 0, 1, 0};
-uint8_t q_braille[6] = {1, 1, 1, 1, 1, 0};
-uint8_t r_braille[6] = {1, 0, 1, 1, 1, 0};
-uint8_t s_braille[6] = {0, 1, 1, 0, 1, 0};
-uint8_t t_braille[6] = {0, 1, 1, 1, 1, 0};
-uint8_t u_braille[6] = {1, 0, 0, 0, 1, 1};
-uint8_t v_braille[6] = {1, 0, 1, 0, 1, 1};
-uint8_t w_braille[6] = {0, 1, 1, 1, 0, 1};
-uint8_t x_braille[6] = {1, 1, 0, 0, 1, 1};
-uint8_t y_braille[6] = {1, 1, 0, 1, 1, 1};
-uint8_t z_braille[6] = {1, 0, 0, 1, 1, 1};
 
-uint8_t* braille_map[] = 
+// Matriz compacta de padrões Braille (6 bits por letra)
+static const uint8_t braille_patterns[26][6] = 
 {
-    a_braille, b_braille, c_braille, d_braille, e_braille,
-    f_braille, g_braille, h_braille, i_braille, j_braille,
-    k_braille, l_braille, m_braille, n_braille, o_braille,
-    p_braille, q_braille, r_braille, s_braille, t_braille,
-    u_braille, v_braille, w_braille, x_braille, y_braille, z_braille
+    {1, 0, 0, 0, 0, 0}, // A
+    {1, 0, 1, 0, 0, 0}, // B
+    {1, 1, 0, 0, 0, 0}, // C
+    {1, 1, 0, 1, 0, 0}, // D
+    {1, 0, 0, 1, 0, 0}, // E
+    {1, 1, 1, 0, 0, 0}, // F
+    {1, 1, 1, 1, 0, 0}, // G
+    {1, 0, 1, 1, 0, 0}, // H
+    {0, 1, 1, 0, 0, 0}, // I
+    {0, 1, 1, 1, 0, 0}, // J
+    {1, 0, 0, 0, 1, 0}, // K
+    {1, 0, 1, 0, 1, 0}, // L
+    {1, 1, 0, 0, 1, 0}, // M
+    {1, 1, 0, 1, 1, 0}, // N
+    {1, 0, 0, 1, 1, 0}, // O
+    {1, 1, 1, 0, 1, 0}, // P
+    {1, 1, 1, 1 ,1 ,0}, // Q
+    {1 ,0 ,1 ,1 ,1 ,0}, // R
+    {0 ,1 ,1 ,0 ,1 ,0}, // S
+    {0 ,1 ,1 ,1 ,1 ,0}, // T
+    {1, 0, 0, 0, 1, 1}, // U
+    {1, 0, 1, 0, 1, 1}, // V
+    {0, 1, 1, 1, 0, 1}, // W
+    {1, 1, 0, 0, 1, 1}, // X
+    {1, 1, 0, 1, 1, 1}, // Y
+    {1, 0, 0, 1, 1, 1}  // Z
 };
-
 
 
 uint8_t* get_braille_pattern(char c) 
 {
     if (c >= 'A' && c <= 'Z') c += 32; // Converte para minúscula
-    return braille_map[c - 'a'];
+    
+    if (c >= 'a' && c <= 'z') {
+        return (uint8_t*)braille_patterns[c - 'a'];
+    }
+    return NULL;
 }
+
 
 letter_status_t check_letter(char c) 
 {
-    if (c >= 'A' && c <= 'Z') return LETTER_STATUS_OK;
-    if (c >= 'a' && c <= 'z') return LETTER_STATUS_OK;
+    if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+        return LETTER_STATUS_OK;
+    }
     return IS_NOT_A_LETTER;
+}
+
+__attribute__((weak)) void apply_braille_to_servos(char* c) 
+{
+    if (c != NULL) 
+    {
+        return; // Função vazia, não faz nada, apenas para evitar erro de compilação
+    }
 }

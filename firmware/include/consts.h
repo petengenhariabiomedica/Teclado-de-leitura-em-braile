@@ -11,7 +11,7 @@
 #define MINANGLE -90                        // DEGREES
 #define MAXANGLE 90                         // DEGREES
 #define ANGLERANGE (MAXANGLE - MINANGLE)    // 180°
-#define MAXDUTY ((1 << RESOLUTION) - 1)         // 65535
+#define MAXDUTY ((1 << RESOLUTION) - 1)     // 65535
 #define RESOLUTION 16                       // BITS
 
 
