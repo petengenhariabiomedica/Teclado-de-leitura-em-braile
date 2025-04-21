@@ -88,7 +88,7 @@ static const uint8_t braille_special_patterns[64][6] =
     {0, 0, 0, 0, 0, 0}, // ã Posição 162
     {0, 0, 0, 0, 0, 0}, // ä Posição 163
     {0, 0, 0, 0, 0, 0}, // å Posição 164
-    {0, 0, 0, 0, 0, 0}, // Æ æ Posição 165
+    {0, 0, 0, 0, 0, 0}, // æ Posição 165
     {1, 1, 1, 0, 1, 1}, // ç Posição 166
     {0, 1, 1, 0, 1, 1}, // è Posição 167
     {1, 1, 1, 1, 1, 1}, // é Posição 168
@@ -127,15 +127,11 @@ uint8_t* get_braille_pattern(char c)
     }
     else if(check_letter(c) == LETTER_STATUS_OK) 
     {
-       return (uint8_t*)braille_special_patterns[c - 'A' + 127]; // 'A' = 65, Adiciona 127 para pegar os caracteres especiais
+       return (uint8_t*)braille_special_patterns[c - 'A' - 127]; // 'A' = 65, subtrai 127 para pegar os caracteres especiais
     }
-    else if (c == ' ') 
+    else if (check_letter(c) == IS_A_SPACE) 
     {
         return NULL;
-    }
-    else if (c == '\n')
-    {
-
     }
     return NULL;
 }
@@ -152,11 +148,11 @@ letter_status_t check_letter(char c)
     }
     else if (c == ' ') 
     {
-        return LETTER_STATUS_OK;
+        return IS_A_SPACE;
     }
     else if (c == '\n')
     {
-        return LETTER_STATUS_OK;
+        return IS_A_SPACE;
     }
     return IS_NOT_A_LETTER;
 }

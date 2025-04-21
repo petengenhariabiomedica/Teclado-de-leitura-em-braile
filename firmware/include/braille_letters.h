@@ -5,7 +5,8 @@
 
 typedef enum letter_status_e{
     LETTER_STATUS_OK,
-    IS_NOT_A_LETTER
+    IS_NOT_A_LETTER,
+    IS_A_SPACE,
 } letter_status_t;
 
 uint8_t* get_braille_pattern(char c);
