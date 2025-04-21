@@ -36,24 +36,24 @@ void loop()
 {
   if (Serial.available()) 
   {
-    char c = Serial.read();
-    if (check_letter(c) == IS_NOT_A_LETTER)                         // Lidar com caracteres não alfabéticos futuramente
-    {
-      for (int num_servo = 0; num_servo < 6; num_servo++) 
+    char incoming = Serial.read();
+
+      if (check_letter(incoming) == IS_NOT_A_LETTER)
       {
-        set_servo_angle(servos[num_servo], ANGLE_OFF);
+        for (int num_servo = 0; num_servo < 6; num_servo++) 
+          set_servo_angle(servos[num_servo], ANGLE_OFF);
       }
-      Serial.println("OK");                                        // Manda OK para a API em Python, apenas para não "travar" o código, tratar futuramente
-      return;
+      else 
+      {
+        apply_braille_to_servos(incoming);
+        Serial.println("OK");
+      }
     }
-    else
-    { 
-    apply_braille_to_servos(c);                                    // Move os servos da forma correspondente a letra, e envia OK
-    Serial.println("OK");
-    }
-    delay(1000); 
-  }
+
+    delay(10); 
 }
+
+
 
 
 void apply_braille_to_servos(char c) 
@@ -62,15 +62,21 @@ void apply_braille_to_servos(char c)
 
   if (pattern == nullptr) 
   {
-    return;
+    for (int num_servo = 0; num_servo < 6; num_servo++) 
+    {
+      set_servo_angle(servos[num_servo], ANGLE_OFF);
+    }
   }
 
-  for (int num_servo = 0; num_servo < 6; num_servo++) 
+  else
   {
-    int16_t angle = pattern[num_servo] ? ANGLE_ON : ANGLE_OFF;
-    int set_angle_result = set_servo_angle(servos[num_servo], angle);
-    if(set_angle_result != SET_ANGLE_SUCESS) 
-    {}
+    for (int num_servo = 0; num_servo < 6; num_servo++) 
+    {
+      int16_t angle = pattern[num_servo] ? ANGLE_ON : ANGLE_OFF;
+      int set_angle_result = set_servo_angle(servos[num_servo], angle);
+      if(set_angle_result != SET_ANGLE_SUCESS) 
+      {}
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, Response, redirect, url_for
-from BrailleKeyboard import BrailleKeyboard
+from BrailleKeyboard4 import BrailleKeyboard
 import os
 import time
 import threading
@@ -38,42 +38,41 @@ def serial_sender():
 
     while serial_index < len(current_text) and processing:
         char = current_text[serial_index]
-
-        retries = 0
-        success = False
-        max_retries = 3
-
-        while retries < max_retries and not success and processing:
-            try:
-                bk_instance.serial_connection.reset_input_buffer()
-                bk_instance.serial_connection.write(char.encode('utf-8'))
-
-                ack = bk_instance.serial_connection.readline().decode('utf-8').strip()
-                
-                if ack == "OK":
-                    success = True
-                    print(f"[✔] Caractere '{char}' (ord: {ord(char)}) confirmado.")
-                else:
-                    retries += 1
-                    if retries < max_retries:  # Só mostra a mensagem se ainda tiver tentativas
-                        print(f"[⚠] Tentativa {retries}/{max_retries} para '{char}'")
-                    time.sleep(0.1)
-
-            except Exception as e:
-                print(f"[✘] Erro durante envio: {e}")
-                processing = False
-                break
-
-        if not success:
-            print(f"[✘] Falha no envio de '{char}' após {retries} tentativas. Pulando caractere.")
         
-        # Avança para o próximo caractere independentemente do sucesso
-        with lock:
-            serial_index += 1
+        if bk_instance.is_alpha_portuguese(char):
+            retries = 0
+            success = False
+            
+            while retries < 5 and not success and processing:
+                try:
+                    bk_instance.serial_connection.reset_input_buffer()
+                    success = bk_instance.send_single_character(char)
+                    
+                    if not success:
+                        retries += 1
+                        print(f"[⚠] Tentativa {retries}/5 para caractere '{char}'")
+                        print(f"[✘] Caractere '{char}' (hex: {hex(ord(char))}) não enviado corretamente.")
+                        time.sleep(0.2 * retries)  # Backoff exponencial
+                
+                except Exception as e:
+                    print(f"[✘] Erro grave: {e}")
+                    processing = False
+                    break
+            
+            if success:
+                with lock:
+                    serial_index += 1
+            else:
+                print(f"[✘] Pulando caractere '{char}' após 5 tentativas")
+                with lock:
+                    serial_index += 1
+        else:
+            with lock:
+                serial_index += 1
+            time.sleep(0.05)
 
     processing = False
-    print("[INFO] Thread serial finalizada")
-
+    print("[INFO] Thread de envio serial finalizada")
 
 @app.route('/stream')
 def stream():

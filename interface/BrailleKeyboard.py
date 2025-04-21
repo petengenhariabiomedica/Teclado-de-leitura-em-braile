@@ -30,38 +30,30 @@ class BrailleKeyboard:
 
     def clean_text_generic(self, text):
         """
-        Limpeza genérica que mantém caracteres acentuados sem espaçamento indevido
+        Versão final corrigindo espaços em caracteres especiais
         """
         if not text:
             return text
 
-        # Normalização Unicode para forma NFC
+        # Passo 1: Normalização NFC para caracteres pré-compostos
         text = unicodedata.normalize('NFC', text)
 
-        # 1. Remove espaços entre caracteres acentuados e suas letras base
-        text = re.sub(r'([A-Za-z])\s+([´`^~¨])\s*([A-Za-z])', r'\1\2\3', text)
-        text = re.sub(r'([A-Za-z])\s+([¸])\s*([A-Za-z])', r'\1\2\3', text)  # Para cedilha
+        # Passo 2: Corrigir espaços entre letras e acentos pré-compostos
+        text = re.sub(
+            r'([A-Za-z])\s+([À-ÿ])',  # Captura "A ´" ou "C Ç"
+            lambda m: m.group(1) + m.group(2),
+            text,
+            flags=re.IGNORECASE
+        )
 
-        # 2. Separa números longos de palavras (mas não quebra acentos)
-        text = re.sub(r'(\d{4,})([A-Za-zÀ-ÿ])', r'\1 \2', text)
+        # Passo 3: Casos especiais de cedilha e combinações críticas
+        text = re.sub(r'\b(C)\s+(Ç)\b', r'\1\2', text, flags=re.IGNORECASE)
+        text = re.sub(r'\b([AEIOU])\s+([´`^~])\b', r'\1\2', text)
 
-        # 3. Remove hífens no final de linha mantendo palavras unidas
-        text = re.sub(r'(\w)-\s+(\w)', r'\1\2', text)
-
-        # 4. Corrige junção indevida de palavras (sem afetar acentos)
-        text = re.sub(r'([a-zÀ-ÿ])([A-ZÀ-ÿ])', r'\1 \2', text)
-        text = re.sub(r'([A-ZÀ-ÿ])([A-ZÀ-ÿ][a-zÀ-ÿ])', r'\1 \2', text)
-
-        # 5. Normaliza espaçamento geral
+        # Passo 4: Demais substituições (mantido do código original)
         text = re.sub(r'\s+', ' ', text)
         text = re.sub(r'(?<!\n)\n(?!\n)', ' ', text)
-        text = re.sub(r'\n{3,}', '\n\n', text)
-
-        # 6. Remove caracteres especiais indesejados (exceto acentos e pontuação)
         text = re.sub(r'[^\w\s.,;:?!\-()\nÀ-ÿ]', '', text)
-
-        # 7. Normaliza parágrafos
-        text = re.sub(r'(\.|\?|\!|\))\s+', r'\1\n\n', text)
 
         return text.strip().upper()
 
@@ -126,34 +118,22 @@ class BrailleKeyboard:
             print(f"[✘] Falha na extração: {e}")
             return ""
 
-    def send_single_character(self, char, max_retries=5):
-        """Envia caracteres acentuados corretamente"""
-        if not self.serial_connection or not self.serial_connection.is_open:
-            print("[✘] Conexão serial não está aberta.")
+    def send_single_character(self, char):
+        """Versão simplificada e robusta"""
+        try:
+            self.serial_connection.write(char.encode('utf-8'))
+            self.serial_connection.flush()
+            
+            start_time = time.time()
+            while time.time() - start_time < 0.5:  # Timeout de 500ms
+                if self.serial_connection.in_waiting:
+                    ack = self.serial_connection.readline().decode('utf-8', errors='ignore').strip()
+                    if ack == "OK":
+                        return True
+            return False
+        except:
             return False
         
-        char_upper = char.upper()
-        if not self.is_alpha_portuguese(char_upper):
-            print(f"[✘] Caractere inválido: {char}")
-            return False
-
-        try:
-            self.serial_connection.write(char_upper.encode('utf-8'))
-            
-            for attempt in range(max_retries):
-                ack = self.serial_connection.readline().decode('utf-8', errors='ignore').strip()
-                if ack == "OK":
-                    print(f"[✔] Caractere '{char_upper}' confirmado")
-                    return True
-                time.sleep(0.1 * (attempt + 1))
-            
-            print(f"[✘] Falha no ACK para '{char_upper}' após {max_retries} tentativas")
-            return False
-            
-        except Exception as e:
-            print(f"[✘] Erro ao enviar caractere '{char_upper}': {e}")
-            return False
-
     def get_next_character(self, text):
         """Obtém o próximo caractere válido incluindo acentuados"""
         while self.current_position < len(text):
