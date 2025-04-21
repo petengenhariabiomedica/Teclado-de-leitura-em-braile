@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Enviando para Braile...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #progress-container {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        #caracteres-enviados {
+            font-family: monospace;
+            white-space: pre-wrap;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            min-height: 100px;
+            border: 1px solid #eee;
+        }
+        .status {
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-container">
+        <h2>Progresso de Envio para Dispositivo Braille</h2>
+        <div class="status" id="status">Preparando envio...</div>
+        <h3>Caracteres Enviados:</h3>
+        <div id="caracteres-enviados">Nenhum caractere enviado ainda</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const eventSource = new EventSource('/stream');
+            const statusDiv = document.getElementById('status');
+            const charsDiv = document.getElementById('caracteres-enviados');
+            
+            statusDiv.textContent = "Conectando ao servidor...";
+
+            eventSource.onopen = function() {
+                statusDiv.textContent = "Conexão estabelecida. Enviando caracteres...";
+            };
+
+            eventSource.onmessage = function(event) {
+                if (event.data === 'done') {
+                    statusDiv.textContent = '✅ Envio concluído com sucesso!';
+                    eventSource.close();
+                } else {
+                    const currentContent = charsDiv.textContent;
+                    charsDiv.textContent = currentContent === "Nenhum caractere enviado ainda" 
+                        ? event.data 
+                        : currentContent + event.data;
+                }
+            };
+
+            eventSource.onerror = function() {
+                statusDiv.textContent = '❌ Erro na conexão com o servidor';
+                eventSource.close();
+            };
+        });
+    </script>
+</body>
+</html>
