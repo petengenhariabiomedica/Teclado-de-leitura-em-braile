@@ -48,6 +48,7 @@ na linguagem brasileira de braile. Todos podem ser
 encontrados na tabela unicode. Os únicos que iremos
 utilizar são: À Á Â Ç È É Ê Ì Í Ò Ó Ô Ù Ú
 */ 
+
 static const uint8_t braille_special_patterns[64][6] = 
 {
     {1, 1, 1, 0, 0, 1}, // À Posição 127

@@ -7,12 +7,12 @@
 #define PULSEMAX 2000                       // 2ms = 90°
 #define PULSERANGE (PULSEMAX - PULSEMIN)    // 1000us = 1ms
 #define CYCLELENGTH 20000                   // 20000us = 20ms / 50Hz
-#define FREQ (1/20000)*1000000              // 50Hz
+#define FREQ (1/CYCLELENGTH)*100000         // 50Hz
 #define MINANGLE -90                        // DEGREES
 #define MAXANGLE 90                         // DEGREES
 #define ANGLERANGE (MAXANGLE - MINANGLE)    // 180°
-#define MAXDUTY ((1 << RESOLUTION) - 1)     // 65535
 #define RESOLUTION 16                       // BITS
+#define MAXDUTY ((1 << RESOLUTION) - 1)     // 65535
 
 
 /********************************************************************************************************************************  

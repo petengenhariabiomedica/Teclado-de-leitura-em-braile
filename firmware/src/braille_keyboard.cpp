@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <consts.h>
-#include "servo.h"
 #include "braille_letters.h"
 
 #define ANGLE_ON 0
@@ -19,7 +18,13 @@ servo_t* servos[] = { &servo0, &servo1, &servo2, &servo3, &servo4, &servo5 };
 
 void setup() 
 {
-  Serial.begin(115200);
+  Serial.begin(115200); 
+  pinMode(servo0.pin, OUTPUT); 
+  pinMode(servo1.pin, OUTPUT);
+  pinMode(servo2.pin, OUTPUT);
+  pinMode(servo3.pin, OUTPUT);
+  pinMode(servo4.pin, OUTPUT);
+  pinMode(servo5.pin, OUTPUT);
 
   for (int num_servo = 0; num_servo < 6; num_servo++) 
   {
@@ -50,7 +55,7 @@ void loop()
       }
     }
 
-    delay(10); 
+    delay(500); 
 }
 
 

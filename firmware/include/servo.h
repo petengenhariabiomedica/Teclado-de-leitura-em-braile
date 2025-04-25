@@ -18,12 +18,12 @@ typedef enum servo_channel_e
 
 typedef enum servo_pin_e
 {
-    SERVO_PIN_0 = 32,
-    SERVO_PIN_1 = 33,
-    SERVO_PIN_2 = 25,
-    SERVO_PIN_3 = 26,
-    SERVO_PIN_4 = 27,
-    SERVO_PIN_5 = 14,
+    SERVO_PIN_0 = 15,
+    SERVO_PIN_1 = 2,
+    SERVO_PIN_2 = 4,
+    SERVO_PIN_3 = 16,
+    SERVO_PIN_4 = 17,
+    SERVO_PIN_5 = 5,
 } servo_pin_t;
 
 typedef struct servo_e

@@ -1,9 +1,19 @@
 #include "servo.h"
+#include "consts.h"
+#include <math.h>
+
 
 void servo_init(servo_t* servo) 
 {
-    ledcAttachPin(servo->pin, servo->channel);
+    // Configura o canal PWM para o servo
     ledcSetup(servo->channel, FREQ, RESOLUTION);
+    ledcAttachPin(servo->pin, servo->channel);
+    for(uint16_t duty_cycle = 0; duty_cycle <= 65525; duty_cycle++)
+    {
+    // Define o valor do PWM
+    ledcWrite(servo->channel, duty_cycle); 
+    }
+    delay(1000); // Aguarda 1 segundo para estabilizar o servo
 }
 
 
@@ -23,9 +33,12 @@ pwm_status_t setPWM(uint8_t channel, uint16_t duty)
 
     else
     {
+        for(uint16_t duty_cycle = 0; duty_cycle <= duty; duty_cycle++)
+        {
         // Define o valor do PWM
-        ledcWrite(channel, duty); 
+        ledcWrite(channel, duty_cycle); 
         return PWM_OK;
+        }
     }
 }
 
@@ -46,7 +59,7 @@ set_angle_status_t setServoAngle(uint8_t channel, int16_t angle)
   
     // Converte de microssegundos para valor PWM com base no ciclo de 20ms e resolução
     uint16_t duty = (uint16_t)pulseWidth * ((1 << RESOLUTION) - 1) / CYCLELENGTH;
-
+    
     if(setPWM(channel, duty) == PWM_OK)
     {
         return SET_ANGLE_SUCESS; // Se o PWM foi definido corretamente, retorna sucesso

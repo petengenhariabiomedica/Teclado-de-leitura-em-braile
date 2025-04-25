@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "set_angle.h": "c"
+        "set_angle.h": "c",
+        "servo.h": "c"
     }
 }
