@@ -1,0 +1,3 @@
+./hardware/braillekeyboard-backups/*
+./hardware/*.lck
+./hardware/fp-info-cache
