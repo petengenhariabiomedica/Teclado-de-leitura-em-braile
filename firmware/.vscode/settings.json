@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "set_angle.h": "c",
-        "servo.h": "c",
-        "esp32servo.h": "c"
-    }
-}

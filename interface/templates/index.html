@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Tradutor Braille</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📘 Tradutor de PDF para Braille</h1>
+        <p class="subtitle">Selecione um arquivo PDF com texto para ser convertido em Braille e enviado ao dispositivo.</p>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="pdf" accept=".pdf" required>
+            <button type="submit">📤 Enviar PDF</button>
+        </form>
+    </div>
+</body>
+</html>
+
