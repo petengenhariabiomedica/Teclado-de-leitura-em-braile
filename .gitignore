@@ -5,4 +5,4 @@
 ./interface/__pycache__/*
 ./interface/.vscode/*
 ./interface/app/uploads/*
-./firmware/.vscode/*
+
