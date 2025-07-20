@@ -1,0 +1,7 @@
+./hardware/braillekeyboard-backups/*
+./hardware/*.lck
+./hardware/fp-info-cache
+./interface/venv/*
+./interface/__pycache__/*
+./interface/.vscode/*
+./interface/app/uploads/*
