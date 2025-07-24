@@ -1,4 +1,4 @@
-24698970252168603
+24700723641101092
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -99350,6 +99350,13 @@ Varistor VF
 0
 2
 2
+barreljack
+BarrelJack_Horizontal
+DC Barrel Jack
+Power Jack
+0
+3
+3
 bc337
 BC33716TA
 BC33716TA-2
