@@ -1607,8 +1607,9 @@
 				)
 			)
 		)
-		(symbol "Transistor_FET:IRLZ44N"
-			(pin_names hide)
+		(symbol "Transistor_BJT:BC337"
+			(pin_names
+				(offset 0) hide)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1621,7 +1622,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "IRLZ44N"
+			(property "Value" "BC337"
 				(at 5.08 0 0)
 				(effects
 					(font
@@ -1630,7 +1631,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+			(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
 				(at 5.08 -1.905 0)
 				(effects
 					(font
@@ -1641,8 +1642,8 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
-				(at 5.08 -3.81 0)
+			(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bc337.pdf"
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1651,7 +1652,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
+			(property "Description" "0.8A Ic, 45V Vce, NPN Transistor, TO-92"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1660,7 +1661,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "N-Channel HEXFET MOSFET Logic-Level"
+			(property "ki_keywords" "NPN Transistor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1669,7 +1670,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "TO?220*"
+			(property "ki_fp_filters" "TO?92*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1678,10 +1679,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "IRLZ44N_0_1"
+			(symbol "BC337_0_1"
 				(polyline
 					(pts
-						(xy 0.254 0) (xy -2.54 0)
+						(xy 0 0) (xy 0.635 0)
 					)
 					(stroke
 						(width 0)
@@ -1693,55 +1694,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0.254 1.905) (xy 0.254 -1.905)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 -1.27) (xy 0.762 -2.286)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 0.508) (xy 0.762 -0.508)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 2.286) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 2.54) (xy 2.54 1.778)
+						(xy 0.635 0.635) (xy 2.54 2.54)
 					)
 					(stroke
 						(width 0)
@@ -1753,7 +1706,7 @@
 				)
 				(polyline
 					(pts
-						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+						(xy 0.635 -0.635) (xy 2.54 -2.54) (xy 2.54 -2.54)
 					)
 					(stroke
 						(width 0)
@@ -1765,10 +1718,10 @@
 				)
 				(polyline
 					(pts
-						(xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778)
+						(xy 0.635 1.905) (xy 0.635 -1.905) (xy 0.635 -1.905)
 					)
 					(stroke
-						(width 0)
+						(width 0.508)
 						(type default)
 					)
 					(fill
@@ -1777,7 +1730,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0)
+						(xy 1.27 -1.778) (xy 1.778 -1.27) (xy 2.286 -2.286) (xy 1.27 -1.778) (xy 1.27 -1.778)
 					)
 					(stroke
 						(width 0)
@@ -1787,33 +1740,9 @@
 						(type outline)
 					)
 				)
-				(polyline
-					(pts
-						(xy 2.794 0.508) (xy 2.921 0.381) (xy 3.683 0.381) (xy 3.81 0.254)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
 				(circle
-					(center 1.651 0)
-					(radius 2.794)
+					(center 1.27 0)
+					(radius 2.8194)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -1822,34 +1751,12 @@
 						(type none)
 					)
 				)
-				(circle
-					(center 2.54 -1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center 2.54 1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
 			)
-			(symbol "IRLZ44N_1_1"
-				(pin input line
-					(at -5.08 0 0)
+			(symbol "BC337_1_1"
+				(pin passive line
+					(at 2.54 5.08 270)
 					(length 2.54)
-					(name "G"
+					(name "C"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1864,10 +1771,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "D"
+				(pin input line
+					(at -5.08 0 0)
+					(length 5.08)
+					(name "B"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1885,7 +1792,7 @@
 				(pin passive line
 					(at 2.54 -5.08 90)
 					(length 2.54)
-					(name "S"
+					(name "E"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4052,7 +3959,7 @@
 		(uuid "fc7c3da6-45f1-4256-bed7-3d24cc790fd3")
 	)
 	(global_label "D13"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 67.31 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4096,7 +4003,7 @@
 		)
 	)
 	(global_label "D18"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 52.07 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4139,28 +4046,6 @@
 			)
 		)
 	)
-	(global_label "EN_MOTOR_1"
-		(shape passive)
-		(at 100.33 66.04 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "19a56e53-49a4-431d-9cfd-0d7c69507e5d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 86.4819 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "VP"
 		(shape passive)
 		(at 31.75 39.37 180)
@@ -4184,7 +4069,7 @@
 		)
 	)
 	(global_label "D12"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 64.77 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4206,7 +4091,7 @@
 		)
 	)
 	(global_label "D19"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 49.53 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4250,7 +4135,7 @@
 		)
 	)
 	(global_label "D33"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 52.07 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4294,7 +4179,7 @@
 		)
 	)
 	(global_label "D34"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 44.45 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4316,7 +4201,7 @@
 		)
 	)
 	(global_label "RX0"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 44.45 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4338,7 +4223,7 @@
 		)
 	)
 	(global_label "VDD3_3"
-		(shape passive)
+		(shape input)
 		(at 67.31 72.39 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4360,7 +4245,7 @@
 		)
 	)
 	(global_label "D25"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 54.61 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4382,7 +4267,7 @@
 		)
 	)
 	(global_label "GND"
-		(shape passive)
+		(shape input)
 		(at 31.75 69.85 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4426,7 +4311,7 @@
 		)
 	)
 	(global_label "GND"
-		(shape passive)
+		(shape input)
 		(at 67.31 69.85 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4447,8 +4332,30 @@
 			)
 		)
 	)
+	(global_label "D18"
+		(shape bidirectional)
+		(at 220.98 66.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "690289e7-82b7-46c8-86a6-ed27f1c8619b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 213.1945 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "VIN"
-		(shape passive)
+		(shape input)
 		(at 31.75 72.39 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4470,7 +4377,7 @@
 		)
 	)
 	(global_label "D27"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 59.69 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4491,8 +4398,30 @@
 			)
 		)
 	)
+	(global_label "D21"
+		(shape bidirectional)
+		(at 100.33 66.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "80fb18f4-a5c7-439d-9f5f-febb5c57e754")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 92.5445 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "D17"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 57.15 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4514,7 +4443,7 @@
 		)
 	)
 	(global_label "D23"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 36.83 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4536,7 +4465,7 @@
 		)
 	)
 	(global_label "D15"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 67.31 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4558,7 +4487,7 @@
 		)
 	)
 	(global_label "D26"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 57.15 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4602,7 +4531,7 @@
 		)
 	)
 	(global_label "D14"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 62.23 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4646,7 +4575,7 @@
 		)
 	)
 	(global_label "D35"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 46.99 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4668,7 +4597,7 @@
 		)
 	)
 	(global_label "D16"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 59.69 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4690,7 +4619,7 @@
 		)
 	)
 	(global_label "D2"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 64.77 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4712,7 +4641,7 @@
 		)
 	)
 	(global_label "TX0"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 41.91 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4729,6 +4658,50 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D16"
+		(shape bidirectional)
+		(at 223.52 123.19 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c7949567-96d9-4863-92a0-3309574f3dc7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 215.7345 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D19"
+		(shape bidirectional)
+		(at 161.29 66.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c810e79f-eefb-4dda-8b21-c8d691bf18f8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 153.5045 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -4756,7 +4729,7 @@
 		)
 	)
 	(global_label "D4"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 62.23 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4800,7 +4773,7 @@
 		)
 	)
 	(global_label "D22"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 39.37 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4821,8 +4794,30 @@
 			)
 		)
 	)
+	(global_label "D5"
+		(shape bidirectional)
+		(at 100.33 123.19 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d847c7c7-a37c-4ae5-99ac-a456147e33e5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 93.754 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "D32"
-		(shape passive)
+		(shape bidirectional)
 		(at 31.75 49.53 180)
 		(fields_autoplaced yes)
 		(effects
@@ -4834,6 +4829,28 @@
 		(uuid "e626f077-f1ed-43a2-b26d-0e9662338448")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 26.1871 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D17"
+		(shape bidirectional)
+		(at 161.29 123.19 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ef76ebbd-ba6c-4675-b77e-ff2fa71d8c9b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 153.5045 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4866,7 +4883,7 @@
 		)
 	)
 	(global_label "D21"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 46.99 0)
 		(fields_autoplaced yes)
 		(effects
@@ -4888,7 +4905,7 @@
 		)
 	)
 	(global_label "D5"
-		(shape passive)
+		(shape bidirectional)
 		(at 67.31 54.61 0)
 		(fields_autoplaced yes)
 		(effects
@@ -5154,7 +5171,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 191.77 48.5648 0)
 			(effects
 				(font
@@ -5396,6 +5413,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_BJT:BC337")
+		(at 179.07 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0bcc9016-236a-4f79-bc8a-0f499980a8c0")
+		(property "Reference" "Q4"
+			(at 184.15 64.7699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BC337"
+			(at 184.15 67.3099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "bc337:BC33716TA"
+			(at 184.15 67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bc337.pdf"
+			(at 179.07 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.8A Ic, 45V Vce, NPN Transistor, TO-92"
+			(at 179.07 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "43d44b1b-d5b0-4898-8cb3-28cc7aa491da")
+		)
+		(pin "2"
+			(uuid "728ce37d-1310-400f-8485-ad86a0aaa099")
+		)
+		(pin "1"
+			(uuid "308c1f22-4482-4094-8eb0-dca5bfa071c2")
+		)
+		(instances
+			(project "braillekeyboard"
+				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
+					(reference "Q4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x15_Socket")
 		(at 57.15 54.61 180)
 		(unit 1)
@@ -5420,7 +5513,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical"
 			(at 57.15 54.61 0)
 			(effects
 				(font
@@ -5746,7 +5839,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 191.77 105.7148 0)
 			(effects
 				(font
@@ -5880,7 +5973,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P25.40mm_Horizontal"
 			(at 106.68 124.968 90)
 			(effects
 				(font
@@ -5989,81 +6082,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:IRLZ44N")
-		(at 241.3 123.19 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "30f54992-4608-4a93-8e84-3236a19670c9")
-		(property "Reference" "Q6"
-			(at 239.014 126.492 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IRLZ44N"
-			(at 233.68 128.524 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 246.38 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
-			(at 246.38 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
-			(at 241.3 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "28106962-6b3a-4e8c-b688-2109c26fe19e")
-		)
-		(pin "1"
-			(uuid "e69bcff6-84d6-4d05-8824-27bcb7da82bc")
-		)
-		(pin "3"
-			(uuid "a22901e8-1e97-4fb9-9d14-097549c9356f")
-		)
-		(instances
-			(project "braillekeyboard"
-				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
-					(reference "Q6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Motor:Motor_DC")
 		(at 260.35 66.04 0)
 		(unit 1)
@@ -6158,7 +6176,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P25.40mm_Horizontal"
 			(at 229.87 124.968 90)
 			(effects
 				(font
@@ -6288,81 +6306,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:IRLZ44N")
-		(at 118.11 123.19 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "40f517d4-eecc-4fde-ac0c-b6918d42868a")
-		(property "Reference" "Q3"
-			(at 115.824 126.492 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IRLZ44N"
-			(at 110.49 128.524 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 123.19 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
-			(at 123.19 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
-			(at 118.11 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "bf31176c-b728-4c6b-a7ab-061180ec26fb")
-		)
-		(pin "1"
-			(uuid "b20bbe6e-0ff4-41de-b487-761610fbacd0")
-		)
-		(pin "3"
-			(uuid "6d26f735-9025-482b-a061-2a4a22b7e930")
-		)
-		(instances
-			(project "braillekeyboard"
-				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
-					(reference "Q3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 194.31 49.53 90)
 		(unit 1)
@@ -6454,7 +6397,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 130.81 105.7148 0)
 			(effects
 				(font
@@ -6491,81 +6434,6 @@
 			(project "braillekeyboard"
 				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
 					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_FET:IRLZ44N")
-		(at 118.11 66.04 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "523863c9-0907-4d8e-b2c6-f5adcc9aeff8")
-		(property "Reference" "Q1"
-			(at 115.824 69.342 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IRLZ44N"
-			(at 110.49 71.374 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 123.19 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
-			(at 123.19 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
-			(at 118.11 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "a0e49eb7-bd4d-4538-947e-bd533b0194ac")
-		)
-		(pin "1"
-			(uuid "d98a7c36-ef52-4faa-ad01-ebc570f6a25b")
-		)
-		(pin "3"
-			(uuid "bfec98e9-7e37-48ca-a3cd-4b4e2cf63a16")
-		)
-		(instances
-			(project ""
-				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
-					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -7058,6 +6926,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_BJT:BC337")
+		(at 238.76 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "60f69fdc-c1c7-4f32-bed7-6601d1e4a886")
+		(property "Reference" "Q5"
+			(at 243.84 64.7699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BC337"
+			(at 243.84 67.3099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "bc337:BC33716TA"
+			(at 243.84 67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bc337.pdf"
+			(at 238.76 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.8A Ic, 45V Vce, NPN Transistor, TO-92"
+			(at 238.76 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8b667ca4-c0f5-431c-ba8b-3f34397384e3")
+		)
+		(pin "2"
+			(uuid "78082d02-46b3-4e39-85c9-c9d2143b164d")
+		)
+		(pin "1"
+			(uuid "45761f6d-4250-4a73-b126-209649accd0a")
+		)
+		(instances
+			(project "braillekeyboard"
+				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
+					(reference "Q5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 133.35 49.53 90)
 		(unit 1)
@@ -7349,7 +7293,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P7.50mm"
 			(at 191.77 53.6448 0)
 			(effects
 				(font
@@ -7551,7 +7495,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical"
 			(at 40.64 54.61 0)
 			(effects
 				(font
@@ -7658,7 +7602,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P25.40mm_Horizontal"
 			(at 227.33 67.818 90)
 			(effects
 				(font
@@ -7701,6 +7645,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_BJT:BC337")
+		(at 241.3 123.19 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7f707eea-6886-48b0-9120-e798f740d9ed")
+		(property "Reference" "Q6"
+			(at 246.38 121.9199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BC337"
+			(at 246.38 124.4599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "bc337:BC33716TA"
+			(at 246.38 125.095 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bc337.pdf"
+			(at 241.3 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.8A Ic, 45V Vce, NPN Transistor, TO-92"
+			(at 241.3 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "d2bec369-dbb3-490d-ba78-e7f6d8592038")
+		)
+		(pin "2"
+			(uuid "433ca63c-b8ca-49f2-8cf4-cbd5a8295def")
+		)
+		(pin "1"
+			(uuid "1190db5e-7fd6-4d30-98a1-ab273452f6a8")
+		)
+		(instances
+			(project "braillekeyboard"
+				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
+					(reference "Q6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 127 111.76 90)
 		(unit 1)
@@ -7725,7 +7745,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P7.50mm"
 			(at 130.81 110.7948 0)
 			(effects
 				(font
@@ -7880,7 +7900,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P25.40mm_Horizontal"
 			(at 106.68 67.818 90)
 			(effects
 				(font
@@ -8083,7 +8103,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P7.50mm"
 			(at 254 110.7948 0)
 			(effects
 				(font
@@ -8237,7 +8257,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P7.50mm"
 			(at 191.77 110.7948 0)
 			(effects
 				(font
@@ -8304,7 +8324,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P7.50mm"
 			(at 130.81 53.6448 0)
 			(effects
 				(font
@@ -8440,7 +8460,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 130.81 48.5648 0)
 			(effects
 				(font
@@ -8477,81 +8497,6 @@
 			(project ""
 				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
 					(reference "C1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_FET:IRLZ44N")
-		(at 238.76 66.04 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "aa05aebf-5dd0-44eb-bbb7-2672be88b81b")
-		(property "Reference" "Q5"
-			(at 236.474 69.342 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IRLZ44N"
-			(at 231.14 71.374 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 243.84 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
-			(at 243.84 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
-			(at 238.76 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "6cb02cf3-61af-478c-8584-bd2387de0220")
-		)
-		(pin "1"
-			(uuid "c54fa27f-8e58-4389-9f0e-9b5f23dc35a7")
-		)
-		(pin "3"
-			(uuid "acc49c95-688e-44e1-923a-720556dcb054")
-		)
-		(instances
-			(project "braillekeyboard"
-				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
-					(reference "Q5")
 					(unit 1)
 				)
 			)
@@ -8685,6 +8630,82 @@
 			(project "braillekeyboard"
 				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
 					(reference "#PWR13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_BJT:BC337")
+		(at 118.11 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ba9c2748-d0ba-42b8-b6c8-751799b3dac6")
+		(property "Reference" "Q1"
+			(at 123.19 64.7699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BC337"
+			(at 123.19 67.3099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "bc337:BC33716TA"
+			(at 123.19 67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bc337.pdf"
+			(at 118.11 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.8A Ic, 45V Vce, NPN Transistor, TO-92"
+			(at 118.11 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "3cb3b260-9e00-4bb1-81bb-b72424e602df")
+		)
+		(pin "2"
+			(uuid "af3b93c3-dc52-4931-ae69-213f60333490")
+		)
+		(pin "1"
+			(uuid "9005e83f-f196-488c-b0c7-cbc3cf884784")
+		)
+		(instances
+			(project ""
+				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -8851,7 +8872,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 251.46 48.5648 0)
 			(effects
 				(font
@@ -8987,7 +9008,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 254 105.7148 0)
 			(effects
 				(font
@@ -9096,6 +9117,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_BJT:BC337")
+		(at 118.11 123.19 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d1b21078-395f-473a-89bd-380f280a2317")
+		(property "Reference" "Q2"
+			(at 123.19 121.9199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BC337"
+			(at 123.19 124.4599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "bc337:BC33716TA"
+			(at 123.19 125.095 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bc337.pdf"
+			(at 118.11 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.8A Ic, 45V Vce, NPN Transistor, TO-92"
+			(at 118.11 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "ad1de616-6d48-45af-945a-a5b84e263a0b")
+		)
+		(pin "2"
+			(uuid "9cb130df-7916-467c-80ee-e1b82f9981f3")
+		)
+		(pin "1"
+			(uuid "e8e40c46-b78d-4195-a45d-b59a5d7bee15")
+		)
+		(instances
+			(project "braillekeyboard"
+				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
+					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 167.64 123.19 90)
 		(unit 1)
@@ -9121,7 +9218,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P25.40mm_Horizontal"
 			(at 167.64 124.968 90)
 			(effects
 				(font
@@ -9255,7 +9352,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "lm2596:LM2596_Module"
 			(at 53.34 116.84 0)
 			(effects
 				(font
@@ -9304,81 +9401,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:IRLZ44N")
-		(at 179.07 123.19 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ed6ba747-1f0c-4d5a-b181-4cdaa84992da")
-		(property "Reference" "Q4"
-			(at 176.784 126.492 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IRLZ44N"
-			(at 171.45 128.524 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 184.15 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
-			(at 184.15 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
-			(at 179.07 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "85e0886d-4fee-4047-ad28-2e642d61a332")
-		)
-		(pin "1"
-			(uuid "ead54615-37b8-4bd9-b0f8-f5f8fa3be7dc")
-		)
-		(pin "3"
-			(uuid "89c9088f-d0a3-4098-85a7-927c16e098c0")
-		)
-		(instances
-			(project "braillekeyboard"
-				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
-					(reference "Q4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 167.64 66.04 90)
 		(unit 1)
@@ -9404,7 +9426,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P25.40mm_Horizontal"
 			(at 167.64 67.818 90)
 			(effects
 				(font
@@ -9447,16 +9469,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:IRLZ44N")
-		(at 179.07 66.04 0)
+		(lib_id "Transistor_BJT:BC337")
+		(at 179.07 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f5c0bda9-515f-4279-8ad7-c4f803f79601")
-		(property "Reference" "Q2"
-			(at 176.784 69.342 0)
+		(fields_autoplaced yes)
+		(uuid "f8896246-0317-4ad5-8837-63e80fd42c63")
+		(property "Reference" "Q3"
+			(at 184.15 121.9199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9464,8 +9487,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "IRLZ44N"
-			(at 171.45 71.374 0)
+		(property "Value" "BC337"
+			(at 184.15 124.4599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9473,8 +9496,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 184.15 67.945 0)
+		(property "Footprint" "bc337:BC33716TA"
+			(at 184.15 125.095 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9484,8 +9507,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
-			(at 184.15 69.85 0)
+		(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bc337.pdf"
+			(at 179.07 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9494,8 +9517,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
-			(at 179.07 66.04 0)
+		(property "Description" "0.8A Ic, 45V Vce, NPN Transistor, TO-92"
+			(at 179.07 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9503,19 +9526,19 @@
 				(hide yes)
 			)
 		)
+		(pin "3"
+			(uuid "9cc233bb-b2c3-4af9-ba23-ccc15586477a")
+		)
 		(pin "2"
-			(uuid "e5e2d828-326d-4f6d-bf86-ebe574ebcfd4")
+			(uuid "df6abbc8-d4c6-4e34-8ad5-3f3070331e4b")
 		)
 		(pin "1"
-			(uuid "1285254c-5f5c-4f14-b9df-8ce1c11cc3c6")
-		)
-		(pin "3"
-			(uuid "1df39a4f-8e2b-44d3-9981-ac877ae8410f")
+			(uuid "00e16a2e-834e-4f6e-a261-3a8fd6f6682c")
 		)
 		(instances
 			(project "braillekeyboard"
 				(path "/18b850cf-544c-49d6-a580-a3bea7934356"
-					(reference "Q2")
+					(reference "Q3")
 					(unit 1)
 				)
 			)
@@ -9612,7 +9635,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P7.50mm"
 			(at 251.46 53.6448 0)
 			(effects
 				(font
