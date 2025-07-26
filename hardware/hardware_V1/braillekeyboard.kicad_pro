@@ -597,6 +597,14 @@
     [
       "18b850cf-544c-49d6-a580-a3bea7934356",
       "Root"
+    ],
+    [
+      "5bd73ccc-a74c-4aff-8564-0540e3743bcd",
+      "Motors"
+    ],
+    [
+      "7849f93d-75fa-488b-8628-83cf3a682b05",
+      "Digital-Logic Circuit"
     ]
   ],
   "text_variables": {}
